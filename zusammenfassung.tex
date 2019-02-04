@@ -13,8 +13,16 @@
 \section{Definitionen}
 \begin{description}
     \item[Prozess]: Abläufe, mit welchen Materie, Energie und Informationen umgeformt, gespeichert bzw. transportiert werden (ISO).\\
-        $\hookrightarrow$ \textbf{technischer} Prozess:  Ein- und Ausgabe und ustand kann technisch gemessen, gesteuert, geregelt werden.
+        $\hookrightarrow$ \textbf{technischer} Prozess:  Ein- und Ausgabe und Zustand kann technisch gemessen, gesteuert, geregelt werden.
     \item[System]: Gebilde, kann Eingabesignale aus der Umwelt entgegen nehmen und Ausgabesignale abgeben.
+    \item[Sensoren] nehmen   Informationen   über   den   Zustand   eines   technischen   Prozesses   durch Messung  auf  und  leiten  diese  zum Computer
+    \item[Aktoren] Zugriff über Stellperipherie, welche über Aktoren in den Prozess eingreift. 
+    \item[Signal] Zeitlicher  Verlauf x(t)  einer  (physikalischen) Größe, welcher Informationen in sich trägt.\\
+    	$\hookrightarrow$ \textbf{Testsignal}: ist   ein   typisches   Signal,   das   zur   Prüfung   oder Identifizierung eines Systems dient \\
+    	$\hookrightarrow$ \textbf{Elementarsignal}: Unter einem Elementarsignal versteht man eine Klasse von Zeitfunktionen, aus   denen   jeder   beliebige   Signalverlauf   zusammensetzbar   ist.
+    \item[Gewichtsfunktion] Ein   lineares,   zeitivariantes und   kausales (LTI-)System   wird durch   die Gewichtsfunktion g(t) (bzw. Stoßantwort) eindeutig beschrieben. Besitzen also zwei Systeme dieselbe Gewichtsfunktion g(t), so sind sie verhaltensgleich, d. h. bei gleichen Signalverläufen an ihren Eingängen liefern beide an ihren Ausgängen ebenfalls identische Signalverläufe.
+    \item[Informationsverlust]: Durch Abtastung gehen die Verläufe des Signals zwischen den Abtastungen verloren.
+    
 \end{description}
 
 \section{Eigenschaften von Systemen}
@@ -22,18 +30,26 @@
 \begin{description}
     \item[statisch]: $y(t)$ ist stets ausschließlich von $x(t)$ abhängig (Eingangssignal zum gleichen Zeitpunkt). Kann mit statischer Kennlinie $y=f(x)$ beschrieben werden.\\
         $\hookrightarrow$ sonst \emph{dynamisch}.
-    \item[kausal]: Es tritt keine Wirkung vor ihrer Ursache auf.
-        \begin{description}
-            \item[schwach]: gleiche Ursache $\implies$ gleiche Wirkung
-            \item[stark]: ähnliche Ursache $\implies$ ähnliche Wirkung
-        \end{description}
+    \item[zeitkontinuierlich]: Ist das Signal zu jedem Zeitpunkt definiert, nennt man es Zeitkontinuierlich. \\
+    	$\hookrightarrow$ sonst \emph{zeitdiskret} 
     \item[linear]: Es gilt das Superpositionsprinzip: 
         \[f(x_1+x_2)=f(x_1)+f(x_2)\]
     bzw. für dynamische Systeme:
         \[f(x_1(t) + x_2(t)))=f(x_1(t)) + f(x_2(t))\]
+    \item[$\hookrightarrow$]\textbf{Diese 3 Kriterien teilen die Systeme in \emph{Systemklassen} auf.}
+    
+    \item[wertdiskret]: Ein Signal x(t) ist wertdiskret, wenn seine abhängigen Variablenwertexzu  einer  endlichen  Menge  von  Zahlen  (Wertevorrat)  gehören.\\
+    	$\hookrightarrow$ sonst wertkontinuierlich
+    \item[$\hookrightarrow$]\textbf{Zeit-/Wert- -diskretheit/-kontinuität teilt Signale in \emph{Signalklassen} auf.}
+    \item[kausal]: Es tritt keine Wirkung vor ihrer Ursache auf.
+    \begin{description}
+    	\item[schwach]: gleiche Ursache $\implies$ gleiche Wirkung
+    	\item[stark]: ähnliche Ursache $\implies$ ähnliche Wirkung
+    \end{description}
+    
 \end{description}
 
-\section{lineare Systeme}
+\section{Lineare Systeme}
 
 \begin{theorem}[Faltungssatz]
     Mit Gewichtsfunktion $g(t)$ ($\approx$ Impulsantwort):
@@ -52,4 +68,32 @@
     Ein System ist \emph{bounded input - bounded output}-Stabil, wenn es für endliche Eingaben stets endliche Ausgaben liefert:
     \[|x(t)|<\infty\implies|y(t)|<\infty \hspace{2cm}\Leftrightarrow \int_{-\infty}^\infty|g(t)|dt<\infty\]
 \end{theorem}
+
+\section{Filterklassen}
+\begin{description}
+	\item[IIR(infinite impulse response)]: auto regressive (AR), rekursive Filter, Singalflussgraph enthält Zyklen\\
+		$\hookrightarrow$ \textbf{Impulsantwort ist an unendlich vielen Stellen $\neq0$}
+	\item[FIR(finite impulse response)]: moving average (MA), nichtrekursive Filter, Signalflussgraph enthält keine Zyklen\\
+	 	$\hookrightarrow$ \textbf{Impulsantwort ist an endlich vielen Stellen $\neq0$}
+\end{description}
+
+\section{Steuerung}
+\begin{description}
+	\item[Offene Steuerung(open loop)]: alle  Teile  des  Systems  sind  rückwirkungsfrei  in  Reihe  oder  parallel geschaltet  und  der Signalflussgraph  ist zyklenfrei
+		$\hookrightarrow$ System muss vollständig bekannt sein, unbekannte Störgrößen werden nicht berücksichtigt, Muss auf Stellglied hinsichtlich Stellgröße vertrauen
+	\item[Regelung (closed loop)]: geschlossene Wirkungsabläufe  und  zyklische Signalflussgraphen  (Regelkreis)
+\end{description}
+
+\begin{tabular}{|l|l|}
+	\hline
+	\textbf{Größe}& \textbf{Bezeichnung in der Regelungstechnik}\\
+	\hline
+	Rohr(Prozess)& Regelstrecke\\
+	Soll-Durchfluss& w-Führungsgröße\\
+	Ist-Durchfluss& x-Regelgröße\\
+	Differenz Soll-Ist& e-Regeldifferenz\\
+	Schieberposition& y-Stellgröße\\
+	Störeinflüsse& z-Störgröße\\
+	\hline
+\end{tabular}
 \end{document}
