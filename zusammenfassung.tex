@@ -1,0 +1,55 @@
+\documentclass[a4paper, 11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[right=2cm, top=2cm, left=2cm, bottom=2cm]{geometry}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Satz}
+
+\title{Zusammenfassung Systemorientierte Informatik}
+
+\begin{document}
+\section{Definitionen}
+\begin{description}
+    \item[Prozess]: Abläufe, mit welchen Materie, Energie und Informationen umgeformt, gespeichert bzw. transportiert werden (ISO).\\
+        $\hookrightarrow$ \textbf{technischer} Prozess:  Ein- und Ausgabe und ustand kann technisch gemessen, gesteuert, geregelt werden.
+    \item[System]: Gebilde, kann Eingabesignale aus der Umwelt entgegen nehmen und Ausgabesignale abgeben.
+\end{description}
+
+\section{Eigenschaften von Systemen}
+
+\begin{description}
+    \item[statisch]: $y(t)$ ist stets ausschließlich von $x(t)$ abhängig (Eingangssignal zum gleichen Zeitpunkt). Kann mit statischer Kennlinie $y=f(x)$ beschrieben werden.\\
+        $\hookrightarrow$ sonst \emph{dynamisch}.
+    \item[kausal]: Es tritt keine Wirkung vor ihrer Ursache auf.
+        \begin{description}
+            \item[schwach]: gleiche Ursache $\implies$ gleiche Wirkung
+            \item[stark]: ähnliche Ursache $\implies$ ähnliche Wirkung
+        \end{description}
+    \item[linear]: Es gilt das Superpositionsprinzip: 
+        \[f(x_1+x_2)=f(x_1)+f(x_2)\]
+    bzw. für dynamische Systeme:
+        \[f(x_1(t) + x_2(t)))=f(x_1(t)) + f(x_2(t))\]
+\end{description}
+
+\section{lineare Systeme}
+
+\begin{theorem}[Faltungssatz]
+    Mit Gewichtsfunktion $g(t)$ ($\approx$ Impulsantwort):
+        \[y(t)=x(t)*g(t)\Leftrightarrow\int_{-\infty}^{\infty}x(\tau)g(t-\tau)d\tau\]
+    im diskreten Fall (mit Gewichtsfolge $g(kT)$):
+        \[y(kT)=x(kT)*g(kT)\Leftrightarrow\sum_{j=-\infty}^\infty g(kT-jT)x(jT)\]
+\end{theorem}
+\begin{theorem}[Aliasing/Stroboskop-Effekt]
+    Wird ein Cosinus-Signal mit Frequenz $f$ mit Periode $T_A = \frac{1}{f_a}$ abgetastet entehen weitere Signale mit $f_{al}=n\cdot f_a\pm f$.
+\end{theorem}
+\begin{theorem}[Abtasttheorem]
+    Für vollständige Signalrekonstruktion muss für Abtastfrequenz $f_a$ und höchste Signalfrequenz $f$ gelten:
+    \[f<\frac{1}{2}f_a\]
+\end{theorem}
+\begin{theorem}[BIBO-Stabilität]
+    Ein System ist \emph{bounded input - bounded output}-Stabil, wenn es für endliche Eingaben stets endliche Ausgaben liefert:
+    \[|x(t)|<\infty\implies|y(t)|<\infty \hspace{2cm}\Leftrightarrow \int_{-\infty}^\infty|g(t)|dt<\infty\]
+\end{theorem}
+\end{document}
