@@ -96,4 +96,18 @@
 	Störeinflüsse& z-Störgröße\\
 	\hline
 \end{tabular}
+
+\section{Rechenregeln in Systemen}
+Rückwärtsrechenregel:
+\[t\rightarrow k\cdot T\]
+\[dt \rightarrow T \]
+\[ d \rightarrow \Delta, \Delta x = x(kT)-x((k-1)T) \]
+
+\begin{description}
+	\item[P-System]: \[ y(t) = K_P\cdot x(t) \rightarrow y(kT) = K_P\cdot x(kT) \]
+	\item[I-System]: \[y(t) = K_I \cdot \int_{-\infty}^{t} x(\tau)\cdot dt \rightarrow y(kT) = y((k-1)T) + T\cdot K_I\cdot x(kT) \]
+	\item[D-System]: \[ y(t) = K_D \cdot \frac{x(t)}{dt} \rightarrow y(kT) = K_D\cdot \frac{x(kT)}{T} \]
+	\item[$T_1$-System]: \[ y(t) +T_1 \cdot \frac{dy}{dz} =x(t) \rightarrow (1-\alpha)\cdot y((k-1)\cdot T) + \alpha \cdot x(kT)\text{ mit }\alpha := \frac{T}{T+T_1}\] 
+	\item[$T_t$-System] \[ y(t) = x(t-T_t) \rightarrow y(kT) = x(kT-T_t) \text{ mit } T_t = n\cdot T \]
+\end{description}
 \end{document}
